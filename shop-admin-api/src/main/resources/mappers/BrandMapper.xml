@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC
+    "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.fh.shop.brand.mapper.IBrandMapper">
+
+    <!--新增-->
+    <insert id="addBrand" parameterType="com.fh.shop.brand.po.Brand">
+      insert into t_brand (brandname,logo,createyear) values (#{brandName},#{logo},#{createYear})
+    </insert>
+
+    <!--判断条件-->
+    <sql id="brandWhere">
+        <where>
+            <if test="brandName != null and brandName != ''">
+                brandname like concat('%',#{brandName},'%')
+            </if>
+        </where>
+    </sql>
+
+    <!--查询总条数-->
+    <select id="findListCount" parameterType="com.fh.shop.brand.param.BrandQueryParam" resultType="long">
+        select count(*) from t_brand
+        <include refid="brandWhere"></include>
+    </select>
+
+    <!--查询分页数据-->
+    <select id="findPageList" parameterType="com.fh.shop.brand.param.BrandQueryParam" resultType="com.fh.shop.brand.po.Brand">
+        select t.* from (select id,brandname,logo,createyear from t_brand
+        <include refid="brandWhere"></include>
+         order by id desc) t limit #{start},#{length}
+    </select>
+
+    <!--删除-->
+    <delete id="del" parameterType="long">
+        delete from t_brand where id=#{arg0}
+    </delete>
+
+    <!--回显-->
+    <select id="findBrand" parameterType="long" resultType="com.fh.shop.brand.po.Brand">
+        select id,brandname,logo,createyear from t_brand where id = #{arg0}
+    </select>
+
+    <!--修改-->
+    <update id="updateBrand" parameterType="com.fh.shop.brand.po.Brand">
+        update t_brand set brandname = #{brandName},logo = #{logo},createYear = #{createYear} where id = #{id}
+    </update>
+
+    <!--查询要删除的记录的图片路径-->
+    <select id="findBrandListByIdList" resultType="string">
+        select logo from t_brand where id in
+        <foreach collection="list" open="(" close=")" separator="," item="x">
+            #{x}
+        </foreach>
+    </select>
+
+    <!--批量删除-->
+    <delete id="deleteBatch">
+        delete from t_brand where id in
+        <foreach collection="list" open="(" close=")" separator="," item="x">
+            #{x}
+        </foreach>
+    </delete>
+    
+    <select id="findAllBrandList" resultType="com.fh.shop.brand.po.Brand">
+        select id,brandname from t_brand
+    </select>
+
+    <select id="findBrandListByTypeId" parameterType="long" resultType="com.fh.shop.brand.po.Brand">
+        select b.id,b.brandName from t_brand b left join t_type_brand tb on b.id = tb.brandId
+        where tb.typeId = #{arg0}
+    </select>
+
+    <select id="findBrandListByTypeIdList" resultType="com.fh.shop.brand.po.Brand">
+        select b.id,b.brandName from t_type_brand tb left join t_brand b on tb.brandId = b.id where tb.typeId in
+        <foreach collection="collection" separator="," open="(" close=")" item="x">
+            #{x}
+        </foreach>
+    </select>
+
+</mapper>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC
+    "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.fh.shop.type.mapper.IAttrMapper">
+
+    <insert id="addAttr" parameterType="com.fh.shop.type.po.Attr">
+        <selectKey keyProperty="id" resultType="long" order="AFTER">
+            select last_insert_id()
+        </selectKey>
+        insert into t_attr (attrName,typeId) values (#{attrName},#{typeId})
+    </insert>
+
+    <select id="findAttrListByTypeId" parameterType="long" resultType="com.fh.shop.type.po.Attr">
+        select id,attrName,typeId from t_attr where typeId = #{arg0}
+    </select>
+    
+    <delete id="deleteByTypeId" parameterType="long">
+        delete from t_attr where typeId = #{arg0}
+    </delete>
+
+    <select id="findAttrValue" resultType="com.fh.shop.type.po.Attr">
+        select id,attrName,typeId from t_attr where typeId in
+        <foreach collection="list" separator="," open="(" close=")" item="x">
+            #{x}
+        </foreach>
+    </select>
+
+    <delete id="deleteBatch">
+        delete from t_attr where typeId in
+        <foreach collection="list" separator="," open="(" close=")" item="x">
+            #{x}
+        </foreach>
+    </delete>
+
+</mapper>

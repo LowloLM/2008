@@ -1,0 +1,11 @@
+package com.fh.admin.api.type.mapper;
+
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.fh.admin.api.type.po.TypeBrand;
+
+import java.util.List;
+
+public interface ITypeBrandMapper extends BaseMapper<TypeBrand> {
+
+    void addBatch(List<TypeBrand> typeBrandList);
+}

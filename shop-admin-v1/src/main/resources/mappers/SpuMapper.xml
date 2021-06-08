@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC
+    "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.fh.shop.admin.mapper.goods.ISpuMapper">
+
+    <sql id="spuWhere">
+        <where>
+            <if test="spuName != null and spuName != ''">
+                spuName like concat('%',#{spuName},'%')
+            </if>
+            <if test="startPrice != null">
+                and price >= #{startPrice}
+            </if>
+            <if test="endPrice != null">
+                and price &lt;= #{endPrice}
+            </if>
+            <if test="startStock != null">
+                and price >= #{startStock}
+            </if>
+            <if test="endStock != null">
+                and price &lt;= #{endStock}
+            </if>
+            <if test="brandId != null and brandId > 0">
+                and brandId = #{brandId}
+            </if>
+            <if test="cate1 != null and cate1 > 0">
+                and cate1 = #{cate1}
+            </if>
+            <if test="cate2 != null and cate2 > 0">
+                and cate2 = #{cate2}
+            </if>
+            <if test="cate3 != null and cate3 > 0">
+                and cate3 = #{cate3}
+            </if>
+        </where>
+    </sql>
+
+    <!--查询总条数-->
+    <select id="findListCount" parameterType="com.fh.shop.admin.param.SpuQueryParam" resultType="long">
+        select count(*) from t_spu
+        <include refid="spuWhere"></include>
+    </select>
+
+    <!--查询分页数据-->
+    <select id="findPageList" parameterType="com.fh.shop.admin.param.SpuQueryParam" resultType="com.fh.shop.admin.po.goods.Spu">
+        select t.* from
+        (select id,spuName,price,stock,brandName,cateName,status,news,recommend from t_spu
+        <include refid="spuWhere"></include>
+        order by id desc) t
+        limit #{start},#{length}
+    </select>
+
+</mapper>

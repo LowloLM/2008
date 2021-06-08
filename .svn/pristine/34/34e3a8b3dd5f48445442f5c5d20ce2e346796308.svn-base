@@ -1,0 +1,67 @@
+package com.fh.admin.api.spec.controller;
+
+import com.fh.admin.api.spec.biz.ISpecService;
+import com.fh.admin.api.spec.param.SpecParam;
+import com.fh.admin.api.spec.param.SpecQueryParam;
+import com.fh.admin.api.spec.param.SpecRestParam;
+import com.fh.shop.common.BaseController;
+import com.fh.shop.common.DataTableResult;
+import com.fh.shop.common.ServerResponse;
+import org.springframework.web.bind.annotation.*;
+
+import javax.annotation.Resource;
+import java.util.List;
+
+@RestController
+@CrossOrigin
+public class SpecController extends BaseController {
+
+    @Resource(name = "specService")
+    private ISpecService specService;
+
+    /***
+     * 新增
+     * @param specParam
+     * @return
+     */
+    @RequestMapping(value = "/spec/add",method = RequestMethod.POST)
+    public ServerResponse add(SpecParam specParam){
+        return specService.addSpec(specParam);
+    }
+
+    @RequestMapping(value = "/spec/addSpec",method = RequestMethod.POST)
+    public ServerResponse addSpec(@RequestBody List<SpecRestParam> specRestParams){
+        return specService.addSpecInfo(specRestParams);
+    }
+
+    /***
+     * 查询分页列表
+     * @param specQueryParam
+     * @return
+     */
+    @RequestMapping(value = "/spec/findList",method = RequestMethod.POST)
+    public DataTableResult findList(SpecQueryParam specQueryParam){
+        return specService.findList(specQueryParam);
+    }
+
+    @RequestMapping(value = "/spec/findSpec",method = RequestMethod.POST)
+    public ServerResponse findSpec(Long id){
+        return specService.findSpec(id);
+    }
+
+    @RequestMapping(value = "/spec/updateSpec",method = RequestMethod.POST)
+    public ServerResponse updateSpec(SpecParam specParam){
+        return specService.updateSpec(specParam);
+    }
+
+    @RequestMapping(value = "/spec/deleteSpec",method = RequestMethod.POST)
+    public ServerResponse deleteSpec(Long id){
+        return specService.deleteSpec(id);
+    }
+
+    @RequestMapping(value = "/spec/deleteBatch",method = RequestMethod.POST)
+    public ServerResponse deleteBatch(String ids){
+        return specService.deleteBatch(ids);
+    }
+
+}

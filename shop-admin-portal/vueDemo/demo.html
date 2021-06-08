@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<script src="../js/vue.js"></script>
+<body>
+    <div id="selectDiv">
+        <select>
+            <option value="-1">请选择</option>
+            <option v-for="book in books" :value="book.id">{{book.bookName}}</option>
+        </select>
+    </div>
+
+    <div id="text1">
+        <input v-model=text1>{{text1}}
+    </div>
+
+    <div id="list1">
+        <ul >
+            <li v-for="a in lists">{{a}}</li>
+        </ul>
+
+        <table border="1px">
+            <tr >
+                <td>名字</td>
+                <td>年龄</td>
+                <td>性别</td>
+            </tr>
+            <tr v-for="n in table1">
+                <td>{{n.stuName}}</td>
+                <td>{{n.stuAge}}</td>
+                <td>{{n.stuSex}}</td>
+            </tr>
+        </table>
+    </div>
+
+    <div id="add">
+       学生名 <input type="text" v-model="stuname">
+       年龄 <input type="text" v-model="stuage">
+       <input type="button" value="新增" v-on:click="adduser()"/>
+        <table border="1px">
+            <tr>
+                <td>名字</td>
+                <td>年龄</td>
+            </tr>
+            <tr v-for="s in stuList">
+                <td>{{s.name}}</td>
+                <td>{{s.age}}</td>
+            </tr>
+        </table>
+    </div>
+</body>
+
+    <script>
+
+        new Vue({
+            el:"#add",
+            data:{
+                stuname:"",
+                stuage:"",
+                stuList:[]
+            },
+            methods:{
+                adduser(){
+                    var user={};
+                    user.name=this.stuname;
+                    user.age=this.stuage;
+                    this.stuList.push(user);
+                    this.stuname="";
+                    this.stuage="";
+                }
+            }
+
+        })
+
+       new Vue({
+            el:"#selectDiv",
+            data:{
+                books :[{id:1,bookName:"三国"},{id:2,bookName:"三国2"},{id:3,bookName:"三国3"}]
+            }
+       })
+
+        new Vue({
+            el:"#text1",
+            data:{
+                text1:"阿凡达",
+            }
+        })
+
+        new Vue({
+            el:"#list1",
+            data:{
+                lists:["a1","s1","d1"],
+                table1:[{stuName:"张三",stuAge:23,stuSex:"男"},{stuName:"李兆龙",stuAge:23,stuSex:"女"},{stuName:"王飞扬",stuAge:23,stuSex:"男"},]
+            }
+        })
+
+
+    </script>
+</html>

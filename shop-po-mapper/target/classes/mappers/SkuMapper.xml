@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC
+    "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.fh.shop.api.mapper.ISkuMapper">
+
+    <select id="findRecommendNewsList" resultType="com.fh.shop.api.po.Sku">
+        select sku.id,sku.skuName,sku.price,sku.image from
+        t_sku sku left join t_spu spu on sku.spuId = spu.id
+        where spu.news = 1 and spu.status = 1 and spu.recommend = 1
+    </select>
+    
+    
+    <select id="skuTaskList" parameterType="int" resultType="com.fh.shop.api.vo.CartItemVO"  >
+        select * from t_sku sk left join t_spu sp on sk.id = sp.id
+        where sk.stock &lt; 10
+    </select>
+
+    <update id="updateStock" parameterType="com.fh.shop.api.vo.CartItemVO">
+        update t_sku set stock=stock-#{count} where id=#{skuId} and stock >= #{count}
+    </update>
+
+    <update id="updateSkuStock">
+        update t_sku set stock=stock+#{count} where id=#{skuId}
+    </update>
+    <update id="updateSalesVolume">
+        update t_sku set sale = sale+#{skuCount} where id = #{skuId}
+    </update>
+
+</mapper>

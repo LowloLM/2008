@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC
+    "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.fh.admin.api.type.mapper.ITypeSpecMapper">
+
+    <insert id="addBatch">
+        insert into t_type_spec (typeId,specId) values
+        <foreach collection="list" item="x" separator=",">
+            (#{x.typeId},#{x.specId})
+        </foreach>
+    </insert>
+
+</mapper>

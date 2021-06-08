@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC
+    "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.fh.shop.admin.mapper.type.ITypeBrandMapper">
+
+    <insert id="addBatch">
+        insert into t_type_brand (typeid,brandid) values
+        <foreach collection="list" separator="," item="x">
+            (#{x.typeId},#{x.brandId})
+        </foreach>
+    </insert>
+
+    <select id="findTypeBrandIdList" parameterType="long" resultType="long">
+        select brandid from t_type_brand where typeid=#{arg0}
+    </select>
+
+    <delete id="deleteTypeBrandByTypeId" parameterType="long">
+        delete from t_type_brand where typeid=#{arg0}
+    </delete>
+
+    <!--批量删除-->
+    <delete id="deleteBatch">
+        delete from t_type_brand where typeid in
+        <foreach collection="list" open="(" close=")" separator="," item="x">
+            #{x}
+        </foreach>
+    </delete>
+
+</mapper>

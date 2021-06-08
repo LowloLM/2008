@@ -1,0 +1,21 @@
+package com.fh.admin.api.book.biz;
+
+import com.fh.admin.api.book.param.BookQueryParam;
+import com.fh.admin.api.book.po.Book;
+import com.fh.shop.common.DataTableResult;
+import com.fh.shop.common.ServerResponse;
+
+public interface IBookService {
+
+    DataTableResult findList(BookQueryParam bookQueryParam);
+
+    ServerResponse addBook(Book book);
+
+    ServerResponse deleteBook(Long id);
+
+    ServerResponse deleteBatch(String ids);
+
+    ServerResponse findBook(Long id);
+
+    ServerResponse updateBook(Book book);
+}

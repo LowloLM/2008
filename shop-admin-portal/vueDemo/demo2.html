@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<script src="../js/vue.js"></script>
+<body >
+<div id="addDiv">
+    名字<input type="text" v-model="userName"><br>
+    年龄<input type="text" v-model="userAge"><br>
+    性别<input type="text" v-model="userSex"><br>
+    <input type="button" value="新增" v-on:click="add()">
+    <input type="button" value="批量删除" @click="delPlsc()">
+    <input type="button" value="更新" @click="updateusr()">
+    <table border="1" v-show="userList.length>0">
+        <tr>
+            <td>名字</td>
+            <td>年龄</td>
+            <td>性别</td>
+            <td>操作</td>
+        </tr>
+        <tr v-for="(s,index) in userList">
+            <td>{{s.name}}</td>
+            <td>{{s.age}}</td>
+            <td>{{s.sex}}</td>
+            <td> <input type="button" value="删除" v-on:click="del(index);"/></td>
+            <td> <input type="button" value="编辑" v-on:click="getuser(index);"/></td>
+        </tr>
+        <h1  v-show="userList.length == 0" :band="fontColor">
+            ！！！！！！！
+        </h1>
+    </table>
+</div>
+
+</body>
+    <script>
+        new Vue({
+            el:"#addDiv",
+            data:{
+                userName:"",
+                userAge:"",
+                userSex:"",
+                userIndex:-1,
+                userList:[]
+            },
+            methods:{
+                add(){
+                    var user={};
+                    user.name=this.userName;
+                    user.age=this.userAge;
+                    user.sex=this.userSex;
+                    //push添加
+                    this.userList.push(user);
+                    this.userName="";
+                    this.userAge="";
+                    this.userSex="";
+                },
+                del(i){
+                    //splice（i,1）splice是删除i是下标1是删除一条
+                    this.userList.splice(i,1);
+                },
+                delPlsc(){
+                    this.userList=[];
+                },
+                getuser(i){
+                    var v_user=this.userList[i];
+                    this.userName= v_user.name;
+                    this.userAge=v_user.age;
+                    this.userSex=v_user.sex;
+                    this.userIndex=i;
+                },
+                updateusr(){
+                    this.userList[this.userIndex].name=this.userName;
+                    this.userList[this.userIndex].sex=this.userSex;
+                    this.userList[this.userIndex].age=this.userAge;
+                }
+            }
+
+        })
+
+    </script>
+</html>

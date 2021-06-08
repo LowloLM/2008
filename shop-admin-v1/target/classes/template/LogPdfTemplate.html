@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Title</title>
+    <style>
+        body {
+            font-family: simhei;
+        }
+    </style>
+</head>
+<body>
+<h1 style="text-align: center">${title}</h1>
+<table cellpadding="0px" cellspacing="0px" border="1px" align="center">
+    <tr style="text-align: center">
+        <th>编号</th>
+        <th>用户名</th>
+        <th>真实姓名</th>
+        <th>操作信息</th>
+    </tr>
+    <#list logs as log>
+    <tr style="background-color: #ffbdfd;text-align: center">
+        <td>${log.id}</td>
+        <td>${log.userName}</td>
+        <td>${log.realName}</td>
+        <td>${log.info}</td>
+    </tr>
+</#list>
+</table>
+<div style="text-align: right">
+    生成时间:${date}
+</div>
+</body>
+</html>

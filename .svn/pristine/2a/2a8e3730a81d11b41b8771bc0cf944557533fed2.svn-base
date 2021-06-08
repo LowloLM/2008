@@ -1,0 +1,11 @@
+package com.fh.admin.api.type.mapper;
+
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.fh.admin.api.type.po.Attr;
+
+import java.util.List;
+
+public interface IAttrMapper extends BaseMapper<Attr> {
+
+    void addBatch(List<Attr> attrList);
+}

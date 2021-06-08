@@ -1,0 +1,28 @@
+package com.fh.admin.api.book.param;
+
+import com.fh.shop.common.Page;
+import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import java.io.Serializable;
+import java.math.BigDecimal;
+import java.util.Date;
+
+@Data
+public class BookQueryParam extends Page implements Serializable {
+
+    private String bookName;
+
+    private BigDecimal minBookPrice;
+
+    private BigDecimal maxBookPrice;
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date startTime;
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date endTime;
+
+    private String bookAuthor;
+
+}

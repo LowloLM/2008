@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="VcsDirectoryMappings">
+    <mapping directory="$PROJECT_DIR$/shop-admin-api" vcs="svn" />
+    <mapping directory="$PROJECT_DIR$/shop-api-springboot" vcs="svn" />
+    <mapping directory="$PROJECT_DIR$/shop-biz" vcs="svn" />
+    <mapping directory="$PROJECT_DIR$/shop-mq" vcs="svn" />
+    <mapping directory="$PROJECT_DIR$/shop-po-mapper" vcs="svn" />
+    <mapping directory="$PROJECT_DIR$/shop-util" vcs="svn" />
+    <mapping directory="$PROJECT_DIR$/student-demo" vcs="svn" />
+    <mapping directory="$PROJECT_DIR$/studnet-demo-html" vcs="svn" />
+  </component>
+</project>

@@ -1,0 +1,36 @@
+package com.fh.shop.common;
+
+import lombok.Getter;
+
+/***
+ * 枚举
+ */
+@Getter
+public enum ResponseEnum {
+
+    CATE_IDS_IS_NULL(3000,"请选择要删除的分类"),
+
+    TYPE_INFO_IS_NULL(2001,"类型信息为空"),
+
+    SPEC_INFO_IS_NULL(2000,"规格信息为空"),
+
+    USERNAME_IS_EMPTY(1000,"用户名为空"),
+
+    PASSWORD_IS_ERROR(1003,"密码错误"),
+
+    PASSWORD_IS_NOT_SAME(1004,"密码不一致"),
+
+    USERNAME_IS_ERROR(1002,"用户名错误"),
+
+    PASSWORD_IS_EMPTY(1001,"密码为空");
+
+    private Integer code;
+
+    private String msg;
+
+    private ResponseEnum(Integer code,String msg){
+        this.code = code;
+        this.msg = msg;
+    }
+
+}

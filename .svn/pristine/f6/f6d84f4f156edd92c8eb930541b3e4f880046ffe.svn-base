@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC
+    "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.fh.admin.api.spec.mapper.ISpecMapper">
+
+    <insert id="addSpec" parameterType="com.fh.admin.api.spec.po.Spec">
+        <selectKey keyProperty="id" resultType="long" order="AFTER">
+            select last_insert_id()
+        </selectKey>
+        insert into t_spec (specName,sort) values (#{specName},#{sort})
+    </insert>
+    
+    <sql id="specWhere">
+        <where>
+            <if test="specName != null and specName != ''">
+                specName like concat('%',#{specName},'%')
+            </if>
+        </where>
+    </sql>
+
+    <select id="findListCount" parameterType="com.fh.admin.api.spec.param.SpecQueryParam" resultType="long">
+        select count(*) from t_spec
+        <include refid="specWhere"></include>
+    </select>
+    
+    <select id="findPageList" parameterType="com.fh.admin.api.spec.param.SpecQueryParam" resultType="com.fh.admin.api.spec.po.Spec">
+        select t.* from (select id,specName,sort from t_spec
+        <include refid="specWhere"></include>
+        order by sort) t limit #{start},#{length}
+    </select>
+
+    <select id="findSpec" parameterType="long" resultType="com.fh.admin.api.spec.po.Spec">
+        select id,specName,sort from t_spec where id = #{arg0}
+    </select>
+
+    <update id="updateSpec" parameterType="com.fh.admin.api.spec.po.Spec">
+        update t_spec set specName=#{specName},sort=#{sort} where id=#{id}
+    </update>
+    
+    <delete id="deleteSpec" parameterType="long">
+        delete from t_spec where id = #{arg0}
+    </delete>
+    
+    <delete id="deleteBatch">
+        delete from t_spec where id in
+        <foreach collection="list" item="x" separator="," open="(" close=")">
+            #{x}
+        </foreach>
+    </delete>
+    
+    <select id="findAllSpecList" resultType="com.fh.admin.api.spec.po.Spec">
+        select id,specName,sort from t_spec order by sort
+    </select>
+
+    <select id="findListByTypeId" parameterType="long" resultType="com.fh.admin.api.spec.po.Spec">
+        select s.id,s.specName,s.sort from t_spec s left join t_type_spec ts
+        on s.id = ts.specId where ts.typeId = #{arg0}
+        order by s.sort
+    </select>
+
+</mapper>

@@ -1,0 +1,20 @@
+package com.fh.shop.util;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+public class DateUtil {
+
+    public static final String FULL_YEAR = "yyyy-MM-dd HH:mm:ss";
+
+    public static final String Y_M_D = "yyyy-MM-dd";
+
+    public static String date2str(Date date,String pattern){
+        if(date == null){
+            return "";
+        }
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+        return simpleDateFormat.format(date);
+    }
+
+}

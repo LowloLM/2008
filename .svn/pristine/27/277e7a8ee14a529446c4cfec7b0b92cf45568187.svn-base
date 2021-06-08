@@ -1,0 +1,11 @@
+package com.fh.admin.api.type.mapper;
+
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.fh.admin.api.type.po.TypeSpec;
+
+import java.util.List;
+
+public interface ITypeSpecMapper extends BaseMapper<TypeSpec> {
+
+    void addBatch(List<TypeSpec> typeSpecList);
+}

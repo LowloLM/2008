@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC
+    "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.fh.shop.admin.mapper.goods.ISkuImageMapper">
+
+<insert id="addBatch">
+    insert into t_sku_image (spuId,image,colorId) values
+    <foreach collection="list" separator="," item="x">
+        (#{x.spuId},#{x.image},#{x.colorId})
+    </foreach>
+</insert>
+
+</mapper>

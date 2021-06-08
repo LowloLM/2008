@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC
+    "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.fh.admin.api.book.mapper.IBookMapper">
+
+    <!--判断条件-->
+    <sql id="bookWhere">
+        <where>
+            <if test="bookName != null and bookName != ''">
+                bookName like concat('%',#{bookName},'%')
+            </if>
+            <if test="minBookPrice != null">
+                and bookPrice >= #{minBookPrice}
+            </if>
+            <if test="maxBookPrice != null">
+                and bookPrice &lt;= #{maxBookPrice}
+            </if>
+            <if test="startTime != null">
+                and bookTime >= #{startTime}
+            </if>
+            <if test="endTime != null">
+                and bookTime &lt;= #{endTime}
+            </if>
+            <if test="bookAuthor != null and bookAuthor != ''">
+                and bookAuthor like concat('%',#{bookAuthor},'%')
+            </if>
+        </where>
+    </sql>
+
+    <!--查询总条数-->
+    <select id="findListCount" parameterType="com.fh.admin.api.book.param.BookQueryParam" resultType="long">
+        select count(*) from t_book
+        <include refid="bookWhere"></include>
+    </select>
+
+    <!--查询分页数据-->
+    <select id="findPageList" parameterType="com.fh.admin.api.book.param.BookQueryParam" resultType="com.fh.admin.api.book.po.Book">
+        select t.* from
+        (select id,bookName,bookPrice,bookTime,bookAuthor from t_book
+        <include refid="bookWhere"></include>
+        order by id desc) t
+        limit #{start},#{length}
+    </select>
+
+</mapper>

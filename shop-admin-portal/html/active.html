@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+    <h1>用户未激活，请进行<a href="#" onclick="activeMail()">激活</a>后，在登录</h1>
+
+
+
+    <script src="../js/jquery-3.3.1.js"></script>
+    <script src="../js/jquery.cookie.min.js"></script>
+    <script src="../js/comon.js"></script>
+    <!-- 加载 Bootstrap 的所有 JavaScript 插件。你也可以根据需要只加载单个插件。 -->
+    <script src="../js/bootstrap/js/bootstrap.min.js"></script>
+<script>
+    function activeMail() {
+        var v_memberData = $.cookie("memberData");
+        console.log(v_memberData);
+        $.ajax({
+            type:"post",
+            url:"http://"+service_url+"/member/sendActiveMail",
+            contentType:"application/json",
+            data:v_memberData,
+            success:function (res) {
+                if (res.code==200){
+                    $.removeCookie("memberData");
+                    location.href="success.html";
+                }else{
+                    location.href="mailSuccess.html";
+                }
+
+            }
+        })
+    }
+</script>
+
+</body>
+</html>

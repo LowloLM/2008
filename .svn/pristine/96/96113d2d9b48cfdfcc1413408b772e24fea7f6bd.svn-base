@@ -1,0 +1,63 @@
+package com.fh.admin.api.type.controller;
+
+import com.fh.admin.api.type.biz.ITypeService;
+import com.fh.admin.api.type.param.TypeRestParam;
+import com.fh.shop.common.ServerResponse;
+import org.springframework.web.bind.annotation.*;
+
+import javax.annotation.Resource;
+
+@RestController
+@CrossOrigin
+public class TypeController {
+
+    @Resource(name = "typeService")
+    private ITypeService typeService;
+
+    @RequestMapping(value = "/type/findInfo",method = RequestMethod.GET)
+    public ServerResponse findInfo(){
+        return typeService.findInfo();
+    }
+
+    @RequestMapping(value = "/type/addType",method = RequestMethod.POST)
+    public ServerResponse addType(@RequestBody TypeRestParam typeRestParam){
+        return typeService.addType(typeRestParam);
+    }
+
+    /*@RequestMapping(value = "/type/findList",method = RequestMethod.POST)
+    @ResponseBody
+    public DataTableResult findList(TypeQueryParam typeQueryParam){
+        return typeService.findList(typeQueryParam);
+    }*/
+
+    /*@RequestMapping(value = "/type/findType",method = RequestMethod.POST)
+    @ResponseBody
+    public ServerResponse findType(Long id){
+        return typeService.findType(id);
+    }
+
+    @RequestMapping(value = "/type/updateType",method = RequestMethod.POST)
+    @ResponseBody
+    public ServerResponse updateType(TypeParam typeParam){
+        return typeService.updateType(typeParam);
+    }
+
+    @RequestMapping(value = "/type/deleteType",method = RequestMethod.POST)
+    @ResponseBody
+    public ServerResponse deleteType(Long id){
+        return typeService.deleteType(id);
+    }
+
+    @RequestMapping(value = "/type/deleteBatch",method = RequestMethod.POST)
+    @ResponseBody
+    public ServerResponse deleteBatch(String ids){
+        return typeService.deleteBatch(ids);
+    }
+
+    @RequestMapping(value = "/type/findAllType",method = RequestMethod.POST)
+    @ResponseBody
+    public ServerResponse findAllType(){
+        return typeService.findAllType();
+    }*/
+
+}

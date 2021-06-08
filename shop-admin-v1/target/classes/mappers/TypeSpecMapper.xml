@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC
+    "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.fh.shop.admin.mapper.type.ITypeSpecMapper">
+
+    <insert id="addBatch">
+        insert into t_type_spec (typeid,specid) values
+        <foreach collection="list" separator="," item="x">
+            (#{x.typeId},#{x.specId})
+        </foreach>
+    </insert>
+
+    <select id="findTypeSpecIdList" parameterType="long" resultType="long">
+        select specid from t_type_spec where typeid=#{arg0}
+    </select>
+    
+    <delete id="deleteTypeSpecByTypeId" parameterType="long">
+        delete from t_type_spec where typeid=#{arg0}
+    </delete>
+
+    <!--批量删除-->
+    <delete id="deleteBatch">
+        delete from t_type_spec where typeid in
+        <foreach collection="list" open="(" close=")" separator="," item="x">
+            #{x}
+        </foreach>
+    </delete>
+
+</mapper>

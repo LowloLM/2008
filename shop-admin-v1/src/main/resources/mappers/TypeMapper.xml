@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC
+    "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.fh.shop.admin.mapper.type.ITypeMapper">
+
+    <insert id="addType" parameterType="com.fh.shop.admin.po.type.Type">
+        <selectKey keyProperty="id" resultType="long" order="AFTER">
+            select last_insert_id()
+        </selectKey>
+        insert into t_type (typeName) values (#{typeName})
+    </insert>
+    
+    <sql id="typeWhere">
+        <where>
+            <if test="typeName != null and typeName != ''">
+                typeName like concat('%',#{typeName},'%')
+            </if>
+        </where>
+    </sql>
+    
+    <select id="findListCount" parameterType="com.fh.shop.admin.param.TypeQueryParam" resultType="long">
+        select count(1) from t_type <include refid="typeWhere"></include>
+    </select>
+
+    <select id="findPageList" parameterType="com.fh.shop.admin.param.TypeQueryParam" resultType="com.fh.shop.admin.po.type.Type">
+        select t.* from (select id,typeName from t_type
+        <include refid="typeWhere"></include>
+        order by id desc) t limit #{start},#{length}
+    </select>
+
+    <select id="findType" parameterType="long" resultType="com.fh.shop.admin.po.type.Type">
+        select id,typeName from t_type where id=#{arg0}
+    </select>
+
+    <update id="updateType" parameterType="com.fh.shop.admin.po.type.Type">
+        update t_type set typeName = #{typeName} where id = #{id}
+    </update>
+
+    <delete id="deleteType" parameterType="long">
+        delete from t_type where id = #{arg0}
+    </delete>
+
+    <!--批量删除-->
+    <delete id="deleteBatch">
+        delete from t_type where id in
+        <foreach collection="list" open="(" close=")" separator="," item="x">
+            #{x}
+        </foreach>
+    </delete>
+    
+    <select id="findAllType" resultType="com.fh.shop.admin.po.type.Type">
+        select id,typeName from t_type
+    </select>
+
+</mapper>

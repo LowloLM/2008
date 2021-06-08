@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/shop-admin-api" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/shop-admin-v1" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/shop-admin-vue" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/shop-api-springboot" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/shop-biz" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/shop-mq" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/shop-po-mapper" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/shop-util" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/student-demo" charset="UTF-8" />
+  </component>
+</project>

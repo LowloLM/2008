@@ -1,0 +1,21 @@
+package com.fh.admin.api.type.param;
+
+import com.fh.admin.api.type.po.*;
+import lombok.Data;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+
+@Data
+public class TypeRestParam implements Serializable {
+
+    private Type type = new Type();
+
+    private List<TypeAttrRestParam> typeAttrRestParamList = new ArrayList<>();
+
+    private List<TypeBrand> typeBrandList = new ArrayList<>();
+
+    private List<TypeSpec> typeSpecList = new ArrayList<>();
+
+}

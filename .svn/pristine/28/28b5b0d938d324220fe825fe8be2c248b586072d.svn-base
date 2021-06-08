@@ -1,0 +1,78 @@
+package com.fh.admin.api.type.biz;
+
+import com.fh.admin.api.brand.mapper.IBrandMapper;
+import com.fh.admin.api.brand.po.Brand;
+import com.fh.admin.api.spec.mapper.ISpecMapper;
+import com.fh.admin.api.spec.po.Spec;
+import com.fh.admin.api.type.mapper.*;
+import com.fh.admin.api.type.param.TypeAttrRestParam;
+import com.fh.admin.api.type.param.TypeRestParam;
+import com.fh.admin.api.type.po.*;
+import com.fh.admin.api.type.vo.TypeVo;
+import com.fh.shop.common.ServerResponse;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+
+@Service("typeService")
+public class ITypeServiceImpl implements ITypeService {
+
+    @Autowired
+    private ITypeMapper typeMapper;
+
+    @Autowired
+    private IAttrMapper attrMapper;
+
+    @Autowired
+    private IAttrValueMapper attrValueMapper;
+
+    @Autowired
+    private ITypeBrandMapper  typeBrandMapper;
+
+    @Autowired
+    private ITypeSpecMapper typeSpecMapper;
+
+    @Autowired
+    private ISpecMapper specMapper;
+
+    @Autowired
+    private IBrandMapper brandMapper;
+
+    @Override
+    public ServerResponse addType(TypeRestParam typeRestParam) {
+        Type type = typeRestParam.getType();
+        typeMapper.insert(type);
+        Long typeId = type.getId();
+        List<TypeBrand> typeBrandList = typeRestParam.getTypeBrandList();
+        typeBrandList.stream().forEach(x -> x.setTypeId(typeId));
+        typeBrandMapper.addBatch(typeBrandList);
+        List<TypeSpec> typeSpecList = typeRestParam.getTypeSpecList();
+        typeSpecList.stream().forEach(x -> x.setTypeId(typeId));
+        typeSpecMapper.addBatch(typeSpecList);
+        List<TypeAttrRestParam> typeAttrRestParamList = typeRestParam.getTypeAttrRestParamList();
+        typeAttrRestParamList.stream().forEach(x -> {
+            Attr attr = x.getAttr();
+            attr.setTypeId(typeId);
+            List<AttrValue> attrValueList = x.getAttrValueList();
+            attrMapper.insert(attr);
+            long attrId = attr.getId();
+            attrValueList.stream().forEach(y -> y.setAttrId(attrId));
+            attrValueMapper.addBatch(attrValueList);
+        });
+        return ServerResponse.success();
+    }
+
+    @Override
+    public ServerResponse findInfo() {
+        //获取所有的品牌
+        List<Brand> brandList = brandMapper.findAllBrandList();
+        //获取所有的规格
+        List<Spec> specList = specMapper.findAllSpecList();
+        //组装
+        TypeVo typeVo = new TypeVo();
+        typeVo.setBrandList(brandList);
+        typeVo.setSpecList(specList);
+        return ServerResponse.success(typeVo);
+    }
+}

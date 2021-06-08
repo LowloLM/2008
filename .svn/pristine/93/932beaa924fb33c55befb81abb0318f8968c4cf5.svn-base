@@ -1,0 +1,18 @@
+package com.fh.admin.api.spec.param;
+
+import com.fh.admin.api.spec.po.Spec;
+import com.fh.admin.api.spec.po.SpecValue;
+import lombok.Data;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+
+@Data
+public class SpecRestParam implements Serializable {
+
+    private Spec spec = new Spec();
+
+    private List<SpecValue> specValueList = new ArrayList<>();
+
+}

@@ -1,0 +1,18 @@
+package com.fh.admin.api.type.param;
+
+import com.fh.admin.api.type.po.Attr;
+import com.fh.admin.api.type.po.AttrValue;
+import lombok.Data;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+
+@Data
+public class TypeAttrRestParam implements Serializable {
+
+    private Attr attr = new Attr();
+
+    private List<AttrValue> attrValueList = new ArrayList<>();
+
+}

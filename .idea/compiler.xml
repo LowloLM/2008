@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="demo" />
+        <module name="shop-admin-api" />
+        <module name="shop-admin-v1" />
+        <module name="shop-api-springboot" />
+        <module name="shop-biz" />
+        <module name="shop-mq" />
+        <module name="shop-po-mapper" />
+        <module name="shop-util" />
+        <module name="student-demo" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="demo" target="1.8" />
+      <module name="maven-archiver (1)" target="1.5" />
+      <module name="maven-archiver (2)" target="1.5" />
+      <module name="maven-archiver (3)" target="1.5" />
+      <module name="shop (1) (com.fh)" target="1.5" />
+      <module name="shop-admin-v1 (1) (com.fh)" target="1.8" />
+      <module name="shop-admin-vue" target="1.8" />
+      <module name="shop-api-stringboot" target="1.8" />
+      <module name="shop-biz (1)" target="1.8" />
+      <module name="shop-mq (1)" target="1.8" />
+      <module name="shop-po-mapper (1)" target="1.8" />
+      <module name="shop-util (1)" target="1.8" />
+      <module name="shoputil" target="1.8" />
+      <module name="test" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

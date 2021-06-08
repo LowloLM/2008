@@ -1,0 +1,14 @@
+package com.fh.admin.api.brand.mapper;
+
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.fh.admin.api.brand.po.Brand;
+
+import java.util.List;
+
+
+public interface IBrandMapper extends BaseMapper<Brand> {
+
+    void deleteBatch(List<Long> idList);
+
+    List<Brand> findAllBrandList();
+}

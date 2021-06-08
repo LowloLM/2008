@@ -1,0 +1,16 @@
+package com.fh.shop.common;
+
+import lombok.Data;
+
+import java.io.Serializable;
+
+@Data
+public class Page implements Serializable {
+
+    private Long draw;
+
+    private Long start;
+
+    private Long length;
+
+}

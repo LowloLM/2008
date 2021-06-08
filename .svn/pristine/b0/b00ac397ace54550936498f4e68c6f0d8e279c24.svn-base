@@ -1,0 +1,24 @@
+log4j.rootLogger=info,x,b
+log4j.logger.com.fh.shop.admin.mapper=debug
+
+#\u628A\u65E5\u5FD7\u4FE1\u606F\u8F93\u51FA\u5230\u63A7\u5236\u53F0
+log4j.appender.x=org.apache.log4j.ConsoleAppender
+log4j.appender.x.Target=System.out
+log4j.appender.x.layout=org.apache.log4j.PatternLayout
+log4j.appender.x.layout.ConversionPattern=%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %m%n
+
+#\u628A\u65E5\u5FD7\u4FE1\u606F\u8F93\u51FA\u5230\u6587\u4EF6\u4E2D
+log4j.appender.b = org.apache.log4j.FileAppender
+log4j.appender.b.File = d:/fh2008shop.log
+log4j.appender.b.Encoding=UTF-8
+log4j.appender.b.layout=org.apache.log4j.PatternLayout
+log4j.appender.b.layout.ConversionPattern=%-d{yyyy-MM-dd HH:mm:ss}[ %p ]%m%n
+log4j.appender.b.append = true
+
+
+
+
+
+
+
+
