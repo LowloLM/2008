@@ -7,19 +7,19 @@ import java.io.Serializable;
 
 @Getter
 @Setter
-public class ServerResponse implements Serializable {
+public class ServerResponse<T> implements Serializable {
 
     private Integer code;
 
     private String msg;
 
-    private Object data;
+    private T data;
 
     private ServerResponse(){
 
     }
 
-    private ServerResponse(Integer code, String msg, Object data) {
+    private ServerResponse(Integer code, String msg, T data) {
         this.code = code;
         this.msg = msg;
         this.data = data;
@@ -29,7 +29,7 @@ public class ServerResponse implements Serializable {
         return new ServerResponse(200,"ok",null);
     }
 
-    public static ServerResponse success(Object data){
+    public static <T>ServerResponse<T> success(T data){
         return new ServerResponse(200,"ok",data);
     }
 
